@@ -14,12 +14,49 @@ export default new Router({
       component: Home
     },
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
-    }
+      path: '/auth',
+      name: 'auth',
+      component: () => import(/* webpackChunkName: "auth" */ './views/Auth.vue')
+    },
+    {
+      path: '/address-programs',
+      name: 'address-programs',
+      component: () => import(/* webpackChunkName: "address-programs" */ './views/AddressPrograms.vue')
+    },
+    {
+      path: '/check-reports',
+      name: 'check-reports',
+      component: () => import(/* webpackChunkName: "check-reports" */ './views/CheckReports.vue')
+    },
+    {
+      path: '/exported-reports',
+      name: 'exported-reports',
+      component: () => import(/* webpackChunkName: "exported-reports" */ './views/ExportedReports.vue')
+    },
+    {
+      path: '/menu',
+      name: 'menu',
+      component: () => import(/* webpackChunkName: "menu" */ './views/Menu.vue')
+    },
+    {
+      path: '/settings',
+      name: 'settings',
+      component: () => import(/* webpackChunkName: "settings" */ './views/Settings.vue')
+    },
+    {
+      path: '/address-programs',
+      name: 'address-programs',
+      component: () => import(/* webpackChunkName: "address-programs" */ './views/AddressPrograms.vue')
+    },
+    {
+      path: '/user-management',
+      name: 'user-management',
+      component: () => import(/* webpackChunkName: "user-management" */ './views/UserManagement.vue')
+    },
+    {
+      path: '/view-reports',
+      name: 'view-reports',
+      component: () => import(/* webpackChunkName: "view-reports" */ './views/ViewReports.vue')
+    },
   ]
 })
