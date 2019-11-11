@@ -4,7 +4,7 @@ import router from './router'
 import store from './store'
 import AntD from 'ant-design-vue'
 import 'ant-design-vue/dist/antd.css'
-import './style.less'
+import './styles/index.less'
 
 Vue.config.productionTip = false
 Vue.use(AntD)
