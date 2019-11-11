@@ -1,6 +1,6 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
+  <div class="primary">
+    <h2>Добро пожаловать, username!</h2>
   </div>
 </template>
 
@@ -11,5 +11,6 @@ import { Component, Vue } from 'vue-property-decorator'
   components: {
   },
 })
-export default class Menu extends Vue { }
+export default class Menu extends Vue {
+}
 </script>
