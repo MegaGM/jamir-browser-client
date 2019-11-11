@@ -10,8 +10,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Home',
-      component: Home,
+      name: 'Меню',
+      component: () => import(/* webpackChunkName: "menu" */ './views/Menu.vue')
     },
     {
       path: '/auth',
@@ -39,19 +39,14 @@ export default new Router({
       component: () => import(/* webpackChunkName: "exported-reports" */ './views/ExportedReports.vue')
     },
     {
-      path: '/menu',
-      name: 'Меню',
-      component: () => import(/* webpackChunkName: "menu" */ './views/Menu.vue')
+      path: '/user-management',
+      name: 'Управление пользователями',
+      component: () => import(/* webpackChunkName: "user-management" */ './views/UserManagement.vue')
     },
     {
       path: '/settings',
       name: 'Настройки',
       component: () => import(/* webpackChunkName: "settings" */ './views/Settings.vue')
-    },
-    {
-      path: '/user-management',
-      name: 'Управление пользователями',
-      component: () => import(/* webpackChunkName: "user-management" */ './views/UserManagement.vue')
     },
   ]
 })
