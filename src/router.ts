@@ -10,53 +10,48 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: Home
+      name: 'Home',
+      component: Home,
     },
     {
       path: '/auth',
-      name: 'auth',
+      name: 'Авторизация',
       component: () => import(/* webpackChunkName: "auth" */ './views/Auth.vue')
     },
     {
       path: '/address-programs',
-      name: 'address-programs',
+      name: 'Адресные Программы',
       component: () => import(/* webpackChunkName: "address-programs" */ './views/AddressPrograms.vue')
     },
     {
       path: '/check-reports',
-      name: 'check-reports',
+      name: 'Проверка Отчётов',
       component: () => import(/* webpackChunkName: "check-reports" */ './views/CheckReports.vue')
     },
     {
+      path: '/view-reports',
+      name: 'Просмотр Отчётов',
+      component: () => import(/* webpackChunkName: "view-reports" */ './views/ViewReports.vue')
+    },
+    {
       path: '/exported-reports',
-      name: 'exported-reports',
+      name: 'Экспортированные выборки',
       component: () => import(/* webpackChunkName: "exported-reports" */ './views/ExportedReports.vue')
     },
     {
       path: '/menu',
-      name: 'menu',
+      name: 'Меню',
       component: () => import(/* webpackChunkName: "menu" */ './views/Menu.vue')
     },
     {
       path: '/settings',
-      name: 'settings',
+      name: 'Настройки',
       component: () => import(/* webpackChunkName: "settings" */ './views/Settings.vue')
     },
     {
-      path: '/address-programs',
-      name: 'address-programs',
-      component: () => import(/* webpackChunkName: "address-programs" */ './views/AddressPrograms.vue')
-    },
-    {
       path: '/user-management',
-      name: 'user-management',
+      name: 'Управление пользователями',
       component: () => import(/* webpackChunkName: "user-management" */ './views/UserManagement.vue')
-    },
-    {
-      path: '/view-reports',
-      name: 'view-reports',
-      component: () => import(/* webpackChunkName: "view-reports" */ './views/ViewReports.vue')
     },
   ]
 })

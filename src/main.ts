@@ -9,7 +9,13 @@ import './style.less'
 Vue.config.productionTip = false
 Vue.use(AntD)
 
-new Vue({
+declare global {
+  interface Window {
+    app: any
+  }
+}
+
+window.app = new Vue({
   router,
   store,
   render: h => h(App)
