@@ -1,6 +1,12 @@
 <template>
-  <div class="primary">
-    <h2>Добро пожаловать, username!</h2>
+  <div class="component">
+    <div class="content">
+      <a-row>
+        <a-col :span="24">
+          <h2>Добро пожаловать, username!</h2>
+        </a-col>
+      </a-row>
+    </div>
   </div>
 </template>
 
