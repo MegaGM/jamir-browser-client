@@ -22,7 +22,12 @@ export default class Header extends Vue {
 
   @Watch('$route', { immediate: true, deep: true })
   onUrlChange(newVal: any) {
-    this.currentPath.splice(0, 1, this.$route.path)
+    let href = this.$route.path
+    // do not account trailing slash
+    if (href[href.length - 1] === '/') {
+      href = href.substring(0, href.length - 1)
+    }
+    this.currentPath.splice(0, 1, href)
   }
 
   shouldMenuItemBeRendered(path: string) {
