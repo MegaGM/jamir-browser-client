@@ -1,6 +1,12 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
+  <div class="component">
+    <div class="content">
+      <a-row>
+        <a-col :span="24">
+          <h2>Check Reports</h2>
+        </a-col>
+      </a-row>
+    </div>
   </div>
 </template>
 
