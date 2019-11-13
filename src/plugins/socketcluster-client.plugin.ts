@@ -1,11 +1,11 @@
 import _Vue from 'vue'
 import socketCluster, { SCClientSocket } from 'socketcluster-client'
 
-// declare module 'vue/types/vue' {
-//   interface Vue {
-//     $socket: object
-//   }
-// }
+declare module 'vue/types/vue' {
+  interface Vue {
+    $socket: SCClientSocket
+  }
+}
 
 declare global {
   interface Window {
