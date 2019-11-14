@@ -5,6 +5,9 @@ declare module 'vue/types/vue' {
   interface Vue {
     $socket: SCClientSocket
   }
+  interface VueConstructor {
+    $socket: SCClientSocket
+  }
 }
 
 declare global {
@@ -26,6 +29,8 @@ export default {
           multiplier: 1,
           randomness: 200,
         },
+        // TODO: change for production
+        ackTimeout: 5 * 60 * 1000,
         secure: false,
         port: 8000,
         hostname: 'localhost',
