@@ -39,10 +39,12 @@ export default {
         Object.assign(scOptions, options)
 
       const scSocket = socketCluster.create(scOptions)
+      Vue.prototype.$socket = scSocket
+      Vue.$socket = scSocket
+
       scSocket.on('connect', () => {
         // FOR DEBUG PURPOSE
         window.$socket = scSocket
-        Vue.prototype.$socket = scSocket
         resolve(scSocket)
       })
     })
