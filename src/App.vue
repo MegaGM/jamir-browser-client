@@ -17,5 +17,9 @@ import Footer from '@/components/Footer.vue'
     Footer,
   }
 })
-export default class App extends Vue { }
+export default class App extends Vue {
+  mounted() {
+    this.$message.config({ top: '70px' })
+  }
+}
 </script>
