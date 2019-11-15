@@ -34,7 +34,7 @@
             @change="handleTableChange"
             bordered
           >
-            <template slot="timestamp-slot" slot-scope="text, record, index">
+            <template slot="humanReadableTimestamp-slot" slot-scope="text, record, index">
               <div>{{text}}</div>
             </template>
             <template slot="title-slot" slot-scope="text, record, index">
@@ -79,9 +79,9 @@
 const columns = [
   {
     title: 'Дата загрузки',
-    dataIndex: 'timestamp',
+    dataIndex: 'humanReadableTimestamp',
     width: '17%',
-    scopedSlots: { customRender: 'timestamp-slot' },
+    scopedSlots: { customRender: 'humanReadableTimestamp-slot' },
   },
   {
     title: 'Название',
