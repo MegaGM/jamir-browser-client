@@ -98,7 +98,7 @@ const columns = [
 
 const pagination: any = {
   current: 1,
-  pageSize: 2,
+  pageSize: 10,
   total: 0,
   showSizeChanger: true,
 }
@@ -137,7 +137,6 @@ export default class AdressPrograms extends Vue {
   }
 
   async reloadAddressPrograms(options?: object) {
-    console.info('reloadAddressPrograms this.pagination.total b', this.pagination.total)
     if (!options) {
       options = { pagination: this.pagination, filters: this.filters, sorter: this.sorter }
     }
@@ -150,7 +149,6 @@ export default class AdressPrograms extends Vue {
       this.pagination.current = (current - 1)
       await this.reloadAddressPrograms()
     }
-    console.info('reloadAddressPrograms this.pagination.total a', this.pagination.total)
   }
 
   handleTableChange(pagination: any, filters: object, sorter: object) {
