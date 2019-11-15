@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import AddressProgram from '../types/AddressProgram';
+import AddressProgram from '../types/AddressProgram'
 
 Vue.use(Vuex)
 
