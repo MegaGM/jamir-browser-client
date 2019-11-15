@@ -45,5 +45,6 @@ export default class Header extends Vue {
 header {
   text-align: center;
   background-color: white;
+  margin-bottom: 50px;
 }
 </style>
