@@ -1,12 +1,13 @@
 import Vue from 'vue'
+
+import SCVue from './plugins/socketcluster-client.plugin'
+Vue.use(SCVue)
+
 import App from './App.vue'
 import router from './router'
-import store from './store'
+import store from './store/index'
 import AntD from 'ant-design-vue'
 import './styles/index.less'
-import SCVue from './plugins/socketcluster-client.plugin'
-
-Vue.use(SCVue)
 Vue.config.productionTip = false
 Vue.use(AntD)
 
