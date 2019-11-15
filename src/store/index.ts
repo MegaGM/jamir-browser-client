@@ -13,6 +13,25 @@ export default new Vuex.Store({
     addressProgramsCount: (state) => state.addressProgramsCount,
     addressPrograms: (state) => state.addressPrograms,
   },
+  mutations: {
+    setAddressProgramsCount: (state, payload) => state.addressProgramsCount = payload,
+    setAddressPrograms: (state, payload) => state.addressPrograms = payload,
+    updateAddressProgramTitleVuex(state, { _id, title }) {
+      const target = findAP(state, _id)
+      target.title = title
+    },
+    toggleAddressProgramEditableVuex(state, { _id, editable, cancel }) {
+      const target = findAP(state, _id)
+      target.editable = editable
+
+      if (editable) { // save title to be able to discard changes later
+        target.initialTitle = target.title
+      }
+      else if (cancel && target.initialTitle) {
+        target.title = target.initialTitle
+      }
+    },
+  },
   actions: {
     async getAddressPrograms({ commit }, { pagination, filters, sorter } = {}) {
       const options:
@@ -33,6 +52,7 @@ export default new Vuex.Store({
         Vue.$socket.emit('getAddressPrograms', options, makeDefaultSCCallback(reject, resolve))
       })
 
+      console.info('getAddressPrograms:', addressPrograms)
       commit('setAddressProgramsCount', addressProgramsCount)
       commit('setAddressPrograms', addressPrograms)
     },
@@ -48,25 +68,6 @@ export default new Vuex.Store({
       return new Promise((resolve, reject) => {
         Vue.$socket.emit('deleteAddressProgram', { _id }, makeDefaultSCCallback(reject, resolve))
       })
-    },
-  },
-  mutations: {
-    setAddressProgramsCount: (state, payload) => state.addressProgramsCount = payload,
-    setAddressPrograms: (state, payload) => state.addressPrograms = payload,
-    updateAddressProgramTitleVuex(state, { _id, title }) {
-      const target = findAP(state, _id)
-      target.title = title
-    },
-    toggleAddressProgramEditableVuex(state, { _id, editable, cancel }) {
-      const target = findAP(state, _id)
-      target.editable = editable
-
-      if (editable) { // save title to be able to discard changes later
-        target.initialTitle = target.title
-      }
-      else if (cancel && target.initialTitle) {
-        target.title = target.initialTitle
-      }
     },
   },
 })
