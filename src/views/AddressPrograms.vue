@@ -68,9 +68,6 @@
           </a-table>
         </a-col>
       </a-row>
-      <a-row>
-        <a-col :span="24">{{addressPrograms}}</a-col>
-      </a-row>
     </div>
   </div>
 </template>
