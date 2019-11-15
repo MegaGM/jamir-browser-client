@@ -34,6 +34,9 @@
             @change="handleTableChange"
             bordered
           >
+            <template slot="timestamp-slot" slot-scope="text, record, index">
+              <div>{{text}}</div>
+            </template>
             <template slot="title-slot" slot-scope="text, record, index">
               <div>
                 <a-input
@@ -75,6 +78,12 @@
 <script lang="ts">
 const columns = [
   {
+    title: 'Дата загрузки',
+    dataIndex: 'timestamp',
+    width: '17%',
+    scopedSlots: { customRender: 'timestamp-slot' },
+  },
+  {
     title: 'Название',
     dataIndex: 'title',
     scopedSlots: { customRender: 'title-slot' },
@@ -82,7 +91,7 @@ const columns = [
   {
     title: 'Кол-во строк',
     dataIndex: 'rowCount',
-    width: '13%',
+    width: '11%',
     scopedSlots: { customRender: 'rowCount-slot' },
   },
   {
