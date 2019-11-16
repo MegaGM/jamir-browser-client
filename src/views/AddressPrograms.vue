@@ -107,6 +107,7 @@ const columns = [
 const pagination: any = {
   current: 1,
   pageSize: 10,
+  pageSizeOptions: ['5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '20', '30', '40'],
   total: 0,
   showSizeChanger: true,
   showTotal: (total: number, range: Array<number>) => {
