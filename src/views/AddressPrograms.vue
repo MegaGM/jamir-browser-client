@@ -8,7 +8,7 @@
               :beforeUpload="beforeFileUpload"
               :showUploadList="false"
               :multiple="false"
-              accept=".xls, .xlsx, .txt, .jpg"
+              accept=".xls, .xlsx"
             >
               <a-button>
                 <a-icon type="upload" />Выбрать *.xlsx файл
