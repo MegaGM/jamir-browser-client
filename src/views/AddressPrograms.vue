@@ -49,7 +49,7 @@
                   <template v-else>{{text}}</template>
                 </div>
               </template>
-              <template slot="rowCount-slot" slot-scope="text, record, index">
+              <template slot="totalRowCount-slot" slot-scope="text, record, index">
                 <div>{{text}}</div>
               </template>
               <template slot="actions-slot" slot-scope="text, record, index">
@@ -92,9 +92,9 @@ const columns = [
   },
   {
     title: 'Кол-во строк',
-    dataIndex: 'rowCount',
+    dataIndex: 'totalRowCount',
     width: '11%',
-    scopedSlots: { customRender: 'rowCount-slot' },
+    scopedSlots: { customRender: 'totalRowCount-slot' },
   },
   {
     title: 'Действия',
@@ -109,6 +109,10 @@ const pagination: any = {
   pageSize: 10,
   total: 0,
   showSizeChanger: true,
+  showTotal: (total: number, range: Array<number>) => {
+    console.info('showTotal', total, range)
+    return `${range[0]}-${range[1]} из ${total}`
+  },
 }
 
 import { Component, Watch, Vue } from 'vue-property-decorator'
