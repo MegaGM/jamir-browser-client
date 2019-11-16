@@ -2,9 +2,15 @@ import AddressProgramRow from './AddressProgramRow'
 
 export default interface AddressProgram {
   _id: string
+
   title: string
-  editable?: boolean
   initialTitle?: string
+
+  cities: { [key: string]: number }
+
   rows?: Array<AddressProgramRow>
-  rowCount: number
+  totalRowCount: number
+  queriedRowCount?: number
+
+  editable?: boolean
 }

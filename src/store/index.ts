@@ -10,15 +10,18 @@ export default new Vuex.Store({
     locale: ru_RU,
     addressProgramsCount: 0,
     addressPrograms: [],
+    addressProgramWithRows: {},
   },
   getters: {
     locale: (state) => state.locale,
     addressProgramsCount: (state) => state.addressProgramsCount,
     addressPrograms: (state) => state.addressPrograms,
+    addressProgramWithRows: (state) => state.addressProgramWithRows,
   },
   mutations: {
     setAddressProgramsCount: (state, payload) => state.addressProgramsCount = payload,
     setAddressPrograms: (state, payload) => state.addressPrograms = payload,
+    setAddressProgramWithRows: (state, payload) => state.addressProgramWithRows = payload,
     updateAddressProgramTitleVuex(state, { _id, title }) {
       const target = findAP(state, _id)
       target.title = title
@@ -58,6 +61,36 @@ export default new Vuex.Store({
       console.info('getAddressPrograms:', addressPrograms)
       commit('setAddressProgramsCount', addressProgramsCount)
       commit('setAddressPrograms', addressPrograms)
+    },
+    async getAddressProgramWithRows({ commit }, { _id, pagination, filters, sorter } = {}) {
+      const options:
+        { _id: string, query: { [key: string]: object }, offset: number, limit: number, order: object } =
+        { _id, offset: 0, query: {}, limit: 0, order: { city: 1, streetName: 1, buildingBaseNumber: 1 } }
+
+      if (pagination) {
+        const { current, pageSize } = pagination
+        options.offset = (current - 1) * pageSize
+        if (options.offset < 0) {
+          options.offset = 0
+        }
+        options.limit = pageSize
+        // options.order = { _id: -1 }
+      }
+
+      if (filters) {
+        for (const field in filters) {
+          if (filters[field].length) {
+            options.query[field] = { $in: filters[field] }
+          }
+        }
+      }
+
+      const addressProgram = await new Promise((resolve, reject) => {
+        Vue.$socket.emit('getAddressProgramWithRows', options, makeDefaultSCCallback(reject, resolve))
+      })
+
+      console.info('getAddressProgramWithRows:', addressProgram)
+      commit('setAddressProgramWithRows', addressProgram)
     },
     async updateAddressProgramTitle({ state }, _id) {
       const target = findAP(state, _id)
