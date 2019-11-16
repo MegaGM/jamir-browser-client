@@ -1,15 +1,18 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import ru_RU from 'ant-design-vue/es/locale-provider/ru_RU'
 import AddressProgram from '../types/AddressProgram'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    locale: ru_RU,
     addressProgramsCount: 0,
     addressPrograms: [],
   },
   getters: {
+    locale: (state) => state.locale,
     addressProgramsCount: (state) => state.addressProgramsCount,
     addressPrograms: (state) => state.addressPrograms,
   },

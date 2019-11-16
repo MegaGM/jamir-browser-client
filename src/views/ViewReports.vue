@@ -1,4 +1,5 @@
 <template>
+  <a-locale-provider :locale="locale">
   <div class="component">
     <div class="content">
       <a-row>
@@ -8,6 +9,7 @@
       </a-row>
     </div>
   </div>
+  </a-locale-provider>
 </template>
 
 <script lang="ts">

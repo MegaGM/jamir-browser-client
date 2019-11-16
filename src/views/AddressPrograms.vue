@@ -1,78 +1,80 @@
 <template>
-  <div class="component">
-    <div class="controls">
-      <a-row>
-        <a-col :span="24">
-          <a-upload
-            :beforeUpload="beforeFileUpload"
-            :showUploadList="false"
-            :multiple="false"
-            accept=".xls, .xlsx, .txt, .jpg"
-          >
-            <a-button>
-              <a-icon type="upload" />Выбрать *.xlsx файл
-            </a-button>
-          </a-upload>
-          <a-button
-            type="primary"
-            @click="uploadAddressProgram"
-            :disabled="!file.size"
-            :loading="isUploading"
-          >{{isUploading ? 'Идёт загрузка' : 'Загрузить Адресную Программу' }}</a-button>
-        </a-col>
-      </a-row>
-    </div>
+  <a-locale-provider :locale="locale">
+    <div class="component">
+      <div class="controls">
+        <a-row>
+          <a-col :span="24">
+            <a-upload
+              :beforeUpload="beforeFileUpload"
+              :showUploadList="false"
+              :multiple="false"
+              accept=".xls, .xlsx, .txt, .jpg"
+            >
+              <a-button>
+                <a-icon type="upload" />Выбрать *.xlsx файл
+              </a-button>
+            </a-upload>
+            <a-button
+              type="primary"
+              @click="uploadAddressProgram"
+              :disabled="!file.size"
+              :loading="isUploading"
+            >{{isUploading ? 'Идёт загрузка' : 'Загрузить Адресную Программу' }}</a-button>
+          </a-col>
+        </a-row>
+      </div>
 
-    <div class="content">
-      <a-row>
-        <a-col :span="24">
-          <a-table
-            :columns="columns"
-            :dataSource="addressPrograms"
-            :pagination="pagination"
-            :rowKey="record => record._id"
-            @change="handleTableChange"
-            bordered
-          >
-            <template slot="humanReadableTimestamp-slot" slot-scope="text, record, index">
-              <div>{{text}}</div>
-            </template>
-            <template slot="title-slot" slot-scope="text, record, index">
-              <div>
-                <a-input
-                  v-if="record.editable"
-                  style="margin: -5px 0"
-                  :value="text"
-                  @change="e => updateTitleVuex({_id: record._id, title: e.target.value})"
-                />
-                <template v-else>{{text}}</template>
-              </div>
-            </template>
-            <template slot="rowCount-slot" slot-scope="text, record, index">
-              <div>{{text}}</div>
-            </template>
-            <template slot="actions-slot" slot-scope="text, record, index">
-              <div class="editable-row-operations">
-                <span v-if="record.editable">
-                  <a @click="() => updateTitle(record._id)">Сохранить</a>
-                  <a @click="() => cancelEditRow(record._id, 'cancel')">Отменить</a>
-                </span>
-                <span v-else>
-                  <a @click="() => editRow(record._id)">Редактировать</a>
-                  <a-popconfirm
-                    title="Уверены, что хотите удалить АП?"
-                    @confirm="() => deleteRow(record._id)"
-                  >
-                    <a>Удалить</a>
-                  </a-popconfirm>
-                </span>
-              </div>
-            </template>
-          </a-table>
-        </a-col>
-      </a-row>
+      <div class="content">
+        <a-row>
+          <a-col :span="24">
+            <a-table
+              :columns="columns"
+              :dataSource="addressPrograms"
+              :pagination="pagination"
+              :rowKey="record => record._id"
+              @change="handleTableChange"
+              bordered
+            >
+              <template slot="humanReadableTimestamp-slot" slot-scope="text, record, index">
+                <div>{{text}}</div>
+              </template>
+              <template slot="title-slot" slot-scope="text, record, index">
+                <div>
+                  <a-input
+                    v-if="record.editable"
+                    style="margin: -5px 0"
+                    :value="text"
+                    @change="e => updateTitleVuex({_id: record._id, title: e.target.value})"
+                  />
+                  <template v-else>{{text}}</template>
+                </div>
+              </template>
+              <template slot="rowCount-slot" slot-scope="text, record, index">
+                <div>{{text}}</div>
+              </template>
+              <template slot="actions-slot" slot-scope="text, record, index">
+                <div class="editable-row-operations">
+                  <span v-if="record.editable">
+                    <a @click="() => updateTitle(record._id)">Сохранить</a>
+                    <a @click="() => cancelEditRow(record._id, 'cancel')">Отменить</a>
+                  </span>
+                  <span v-else>
+                    <a @click="() => editRow(record._id)">Редактировать</a>
+                    <a-popconfirm
+                      title="Уверены, что хотите удалить АП?"
+                      @confirm="() => deleteRow(record._id)"
+                    >
+                      <a>Удалить</a>
+                    </a-popconfirm>
+                  </span>
+                </div>
+              </template>
+            </a-table>
+          </a-col>
+        </a-row>
+      </div>
     </div>
-  </div>
+  </a-locale-provider>
 </template>
 
 <script lang="ts">
@@ -122,6 +124,7 @@ export default class AdressPrograms extends Vue {
   filters = {}
   sorter = {}
 
+  @Getter('locale') locale!: object
   @Getter('addressProgramsCount') addressProgramsCount!: number
   @Getter('addressPrograms') addressPrograms!: Array<AddressProgram>
   @Action('getAddressPrograms') getAddressPrograms!: (payload?: object) => void
@@ -135,7 +138,6 @@ export default class AdressPrograms extends Vue {
   setupListeners() {
     const channel = this.$socket.channel('reloadAddressPrograms')
     if (!channel.isSubscribed()) {
-      // TODO: check if it works after navigating to other pages
       channel.subscribe()
       channel.unwatch(this.reloadAddressPrograms)
       channel.watch(this.reloadAddressPrograms)
