@@ -11,7 +11,8 @@
               accept=".xls, .xlsx"
             >
               <a-button>
-                <a-icon type="upload" />Выбрать *.xlsx файл
+                <a-icon :type="file.name ? 'file-excel' : 'upload'" />
+                {{file.name ? file.name : 'Выбрать *.xlsx файл'}}
               </a-button>
             </a-upload>
             <a-button
