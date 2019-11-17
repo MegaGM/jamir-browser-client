@@ -48,5 +48,10 @@ export default new Router({
       name: 'Настройки',
       component: () => import(/* webpackChunkName: "settings" */ './views/Settings.vue')
     },
+    {
+      path: '/upload-report',
+      name: 'Загрузить отчёт',
+      component: () => import(/* webpackChunkName: "settings" */ './views/UploadReport.vue')
+    },
   ]
 })
